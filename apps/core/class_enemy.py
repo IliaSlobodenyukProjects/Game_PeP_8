@@ -27,7 +27,7 @@ class Enemy(
         self.hp = 2
         # Движение по Y
         self.speedY = 0
-        self.grav = 2  # гравитация - скорость движения вниз
+        self.grav = 2
         self.on_ground = True  # Стоит на земле
         self.ground = y + height + 40
         self.y = y
