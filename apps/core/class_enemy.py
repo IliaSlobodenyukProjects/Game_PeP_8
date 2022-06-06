@@ -3,7 +3,7 @@ from media.settings.settings import user_screen_w
 from media.captures.actions.enemy_media import walk
 from media.settings.set import enemy_w, enemy_h, speed
 
-run_animation = []
+run_animation = []  # ghjdthrf
 
 for image in walk:
     run_animation.append(pygame.transform.scale(image, (enemy_w, enemy_h)))
