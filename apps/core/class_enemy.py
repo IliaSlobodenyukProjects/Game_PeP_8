@@ -7,7 +7,7 @@ ENEMY_W = 200
 ENEMY_H = 200
 SPEED = 10
 JUMP = 20
-runAnimation = []
+runAnimation = []  # PeP 8
 
 for image in walk:
     runAnimation.append(pygame.transform.scale(image, (ENEMY_W, ENEMY_H)))
