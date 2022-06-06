@@ -1,22 +1,18 @@
 import pygame
 from media.captures.actions.hero_media import walk, idle, attack
-
-HERO_W = 165
-HERO_H = 165
-SPEED = 15
-JUMP = 20
+from media.settings.set import hero_h, hero_w, speed_hero, jump_hero
 
 runAnimation = []
 for image in walk:
-    runAnimation.append(pygame.transform.scale(image, (HERO_W, HERO_H)))
+    runAnimation.append(pygame.transform.scale(image, (hero_w, hero_h)))
 jumpAnimation = []
 
 idleAnimation = []
 for image in idle:
-    idleAnimation.append(pygame.transform.scale(image, (HERO_W, HERO_H)))  # PeP_8
+    idleAnimation.append(pygame.transform.scale(image, (hero_w, hero_h)))  # PeP_8
 attackAnimation = []
 for image in attack:  # PeP_8
-    attackAnimation.append(pygame.transform.scale(image, (HERO_W, HERO_H)))
+    attackAnimation.append(pygame.transform.scale(image, (hero_w, hero_h)))
 
 
 class Hero(pygame.sprite.Sprite):
@@ -58,17 +54,17 @@ class Hero(pygame.sprite.Sprite):
             self.idleLeft = True
             # self.idleRight = False
             if self.rect.left > 0:
-                self.speedX = -SPEED
+                self.speedX = -speed_hero
             self.a = self.get_coords()
 
         elif keys[pygame.K_d]:  # ПРАВО
             self.idleLeft = False
             # self.idleRight = True
             # if self.rect.right < USER_SCREEN_W:
-            self.speedX = SPEED
+            self.speedX = speed_hero
 
         if keys[pygame.K_SPACE] and self.onGrond:  # ПРЫЖОК
-            self.speedY -= JUMP
+            self.speedY -= jump_hero
             self.onGrond = False
 
         self.rect.x += self.speedX

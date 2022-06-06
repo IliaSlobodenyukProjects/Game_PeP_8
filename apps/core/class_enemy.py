@@ -1,16 +1,12 @@
 import pygame
 from media.settings.settings import user_screen_w
 from media.captures.actions.enemy_media import walk
+from media.settings.set import enemy_w, enemy_h, speed
 
-
-ENEMY_W = 200
-ENEMY_H = 200
-SPEED = 10
-JUMP = 20
-runAnimation = []  # PeP 8
+run_animation = []  # PeP 8
 
 for image in walk:
-    runAnimation.append(pygame.transform.scale(image, (ENEMY_W, ENEMY_H)))
+    run_animation.append(pygame.transform.scale(image, (enemy_w, enemy_h)))
 
 
 class Enemy(
@@ -24,7 +20,7 @@ class Enemy(
         super().__init__(groups)
 
         self.animCount = 0
-        self.image = runAnimation[self.animCount]
+        self.image = run_animation[self.animCount]
         self.rect = self.image.get_rect(x=x, bottom=y + height + 500)
         self.speedX = 0
         self.Left = False
@@ -49,12 +45,12 @@ class Enemy(
         self.rect.y += self.speedY
 
         if not self.Left:
-            self.speedX = SPEED
+            self.speedX = speed
             if self.rect.right > user_screen_w:
                 self.speedX = 0
                 self.Left = True
         else:
-            self.speedX = -SPEED
+            self.speedX = -speed
             if self.rect.right < 150:
                 self.speedX = 0
                 self.Left = False
@@ -94,10 +90,10 @@ class Enemy(
 
         if self.speedX:  # Если скорость по Х не нулевая, значит я иду
             self.animCount += 1  # Счётчик подсчитывает, какую картинку по счёту я должен показать
-            if self.animCount == len(runAnimation):  # если я дошёл до последней картинки в списке картинок
+            if self.animCount == len(run_animation):  # если я дошёл до последней картинки в списке картинок
                 self.animCount = 0  # то обнуляю счётчик, чтобы начать сначала
 
-            self.image = runAnimation[self.animCount]  # Достаю картинку с нужным номером из списка
+            self.image = run_animation[self.animCount]  # Достаю картинку с нужным номером из списка
             if self.speedX > 0:  # Если двигаюсь вправо,
                 self.image = pygame.transform.flip(
                     self.image, True, False

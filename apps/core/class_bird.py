@@ -1,15 +1,11 @@
 import pygame
 from media.settings.settings import user_screen_w
 from media.captures.actions.bird_media import fly
-
-BIRD_W = 200
-BIRD_H = 200
-SPEED = 10
-JUMP = 20
+from media.settings.set import bird_w, bird_h, speed_bird
 
 flyAnimation = []
 for image in fly:
-    flyAnimation.append(pygame.transform.scale(image, (BIRD_W, BIRD_H)))
+    flyAnimation.append(pygame.transform.scale(image, (bird_w, bird_h)))
 
 
 class Bird(pygame.sprite.Sprite):
@@ -24,12 +20,12 @@ class Bird(pygame.sprite.Sprite):
     def update(self):
 
         if not self.Left:
-            self.speedX = SPEED
+            self.speedX = speed_bird
             if self.rect.right > user_screen_w:
                 self.speedX = 0
                 self.Left = True
         else:
-            self.speedX = -SPEED
+            self.speedX = -speed_bird
             if self.rect.right < 150:
                 self.speedX = 0
                 self.Left = False
