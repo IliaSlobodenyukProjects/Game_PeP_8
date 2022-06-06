@@ -36,7 +36,7 @@ class Enemy(
         self.hhp = 0
 
     def update(
-            self, herogroup
+            self, herogroup  # проверка
     ):
         self.herogroup = herogroup
         keys = pygame.key.get_pressed()
