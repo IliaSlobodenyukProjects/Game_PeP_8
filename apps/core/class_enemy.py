@@ -74,9 +74,13 @@ class Enemy(
             if self.hhp == 9:
                 pygame.quit()
 
-    def check_collizion(self, platforms):
+    def check_collizion(
+            self, platforms
+    ):
 
-        if pygame.sprite.spritecollideany(self, platforms):
+        if pygame.sprite.spritecollideany(
+                self, platforms
+        ):
             if self.speedY != 0:
                 if self.speedY > 0:
                     self.on_ground = True
@@ -84,7 +88,9 @@ class Enemy(
         else:
             self.speedY += self.grav
 
-    def animation(self):
+    def animation(
+            self
+    ):
 
         if self.speedX:  # Если скорость по Х не нулевая, значит я иду
             self.animCount += 1  # Счётчик подсчитывает, какую картинку по счёту я должен показать
@@ -93,13 +99,21 @@ class Enemy(
 
             self.image = runAnimation[self.animCount]  # Достаю картинку с нужным номером из списка
             if self.speedX > 0:  # Если двигаюсь вправо,
-                self.image = pygame.transform.flip(self.image, True, False)  # то отзеркаливаю картинку персонажа
+                self.image = pygame.transform.flip(
+                    self.image, True, False
+                )  # то отзеркаливаю картинку персонажа
 
-    def get_coords(self):
+    def get_coords(
+            self
+    ):
         return self.x, self.y
 
-    def attacka(self):
-        hits = pygame.sprite.spritecollide(self, self.herogroup, False, pygame.sprite.collide_circle)
+    def attacka(
+            self
+    ):
+        hits = pygame.sprite.spritecollide(
+            self, self.herogroup, False, pygame.sprite.collide_circle
+        )
         if hits:
             self.hhp += 1
             return True
