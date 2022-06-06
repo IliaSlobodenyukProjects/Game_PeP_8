@@ -15,7 +15,7 @@ idleAnimation = []
 for image in idle:
     idleAnimation.append(pygame.transform.scale(image, (HERO_W, HERO_H)))
 attackAnimation = []
-for image in attack:
+for image in attack:  # PeP_8
     attackAnimation.append(pygame.transform.scale(image, (HERO_W, HERO_H)))
 
 
