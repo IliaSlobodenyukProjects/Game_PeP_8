@@ -6,16 +6,17 @@ from media.settings.set import enemy_w, enemy_h, speed
 run_animation = []  # ghjdthrf
 
 for image in walk:
-    run_animation.append(pygame.transform.scale(image, (enemy_w, enemy_h)))
+    run_animation.append(
+        pygame.transform.scale(
+            image, (
+                enemy_w, enemy_h)))
 
 
 class Enemy(
-    pygame.sprite.Sprite
-):
+    pygame.sprite.Sprite):
     def __init__(
             self, groups, x, y,
-            width, height
-    ):
+            width, height):
 
         super().__init__(groups)
 
@@ -25,7 +26,7 @@ class Enemy(
         self.speedX = 0
         self.Left = False
         self.hp = 2
-        # Движение по Y
+
         self.speedY = 0
         self.grav = 2
         self.on_ground = True  # Стоит на земле
@@ -36,8 +37,8 @@ class Enemy(
         self.hhp = 0
 
     def update(
-            self, herogroup  # проверка
-    ):
+            self, herogroup):
+
         self.herogroup = herogroup
         keys = pygame.key.get_pressed()
 
@@ -71,12 +72,10 @@ class Enemy(
                 pygame.quit()
 
     def check_collizion(
-            self, platforms
-    ):
+            self, platforms):
 
         if pygame.sprite.spritecollideany(
-                self, platforms
-        ):
+                self, platforms):
             if self.speedY != 0:
                 if self.speedY > 0:
                     self.on_ground = True
@@ -85,8 +84,7 @@ class Enemy(
             self.speedY += self.grav
 
     def animation(
-            self
-    ):
+            self):
 
         if self.speedX:  # Если скорость по Х не нулевая, значит я иду
             self.animCount += 1  # Счётчик подсчитывает, какую картинку по счёту я должен показать
@@ -100,16 +98,13 @@ class Enemy(
                 )  # то отзеркаливаю картинку персонажа
 
     def get_coords(
-            self
-    ):
+            self):
         return self.x, self.y
 
     def attacka(
-            self
-    ):
+            self):
         hits = pygame.sprite.spritecollide(
-            self, self.herogroup, False, pygame.sprite.collide_circle
-        )
+            self, self.herogroup, False, pygame.sprite.collide_circle)
         if hits:
             self.hhp += 1
             return True

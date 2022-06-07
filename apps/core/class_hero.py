@@ -4,35 +4,44 @@ from media.settings.set import hero_h, hero_w, speed_hero, jump_hero
 
 runAnimation = []
 for image in walk:
-    runAnimation.append(pygame.transform.scale(image, (hero_w, hero_h)))
+    runAnimation.append(
+        pygame.transform.scale(
+            image, (hero_w, hero_h)))
 jumpAnimation = []
 
 idleAnimation = []
 for image in idle:
-    idleAnimation.append(pygame.transform.scale(image, (hero_w, hero_h)))  # PeP_8
+    idleAnimation.append(
+        pygame.transform.scale(
+            image, (hero_w, hero_h)))  # PeP_8
 attackAnimation = []
 for image in attack:  # PeP_8
-    attackAnimation.append(pygame.transform.scale(image, (hero_w, hero_h)))
+    attackAnimation.append(
+        pygame.transform.scale(
+            image, (hero_w, hero_h)))
 
 
-class Hero(pygame.sprite.Sprite):
+class Hero(
+    pygame.sprite.Sprite):
 
-    def __init__(self, groups, screenH, enemygroup):
+    def __init__(
+            self, groups, screenH, enemygroup):
         super().__init__(groups)
         self.animCount = 0
         self.image = runAnimation[self.animCount]
         self.hp = 4
 
-        self.rect = self.image.get_rect(x=5, bottom=screenH)
+        self.rect = self.image.get_rect(
+            x=5, bottom=screenH)
         self.speedX = 0
         self.a = self.get_coords()
 
         # Движение по Y
         self.speedY = 0
         self.grav = 2  # гравитация - скорость движения вниз
-        self.onGrond = True  # Стоит на земле
+        self.on_ground = True  # Стоит на земле
         self.isJump = False  # прыгает или нет
-        self.GROUND = screenH
+        self.ground = screenH
         self.enemygroup = enemygroup
 
         self.idleLeft = True
@@ -41,7 +50,8 @@ class Hero(pygame.sprite.Sprite):
     #        self.weapon = classes2[sprite][1]
     #        self.move = classes2[sprite][-2]
 
-    def update(self, platforms):
+    def update(
+            self, platforms):
         """
         Функция запускается из главной программы постоянно(в цикле)
         :param platforms:
@@ -57,28 +67,30 @@ class Hero(pygame.sprite.Sprite):
                 self.speedX = -speed_hero
             self.a = self.get_coords()
 
-        elif keys[pygame.K_d]:  # ПРАВО
+        elif keys[pygame.K_d]:
             self.idleLeft = False
             # self.idleRight = True
             # if self.rect.right < USER_SCREEN_W:
             self.speedX = speed_hero
 
-        if keys[pygame.K_SPACE] and self.onGrond:  # ПРЫЖОК
+        if (keys[pygame.K_SPACE]
+                and self.on_ground):  # ПРЫЖОК
             self.speedY -= jump_hero
-            self.onGrond = False
+            self.on_ground = False
 
         self.rect.x += self.speedX
         self.rect.y += self.speedY
 
-        if not self.onGrond:
+        if not self.on_ground:
             self.speedY += self.grav
 
-        if self.rect.bottom >= self.GROUND:
-            self.rect.bottom = self.GROUND
-            self.onGrond = True
+        if self.rect.bottom >= self.ground:
+            self.rect.bottom = self.ground
+            self.on_ground = True
             self.speedY = 0
 
-        if keys[pygame.K_e] and self.speedX == 0:  # атака
+        if (keys[pygame.K_e]
+                and self.speedX == 0):  # атака
             if not self.attack:
                 self.animCount = 0
             self.attack = True
@@ -89,14 +101,17 @@ class Hero(pygame.sprite.Sprite):
         self.animation()
         self.is_alive()
 
-    def check_collizion(self, Platform):
-        if pygame.sprite.spritecollideany(self, Platform):
+    def check_collizion(
+            self, Platform):
+
+        if pygame.sprite.spritecollideany(
+                self, Platform):
             if self.speedY != 0:
                 if self.speedY > 0:
-                    self.onGrond = True
+                    self.on_ground = True
                 self.speedY = 0
         else:
-            self.onGrond = False
+            self.on_ground = False
 
     def is_alive(self):
         if self.hp:
@@ -105,7 +120,9 @@ class Hero(pygame.sprite.Sprite):
             return False
 
     def attacka(self):
-        hits = pygame.sprite.spritecollide(self, self.enemygroup, True, pygame.sprite.collide_circle)
+        hits = pygame.sprite.spritecollide(
+            self, self.enemygroup, True,
+            pygame.sprite.collide_circle)
         if hits:
             return True
 
@@ -139,8 +156,10 @@ class Hero(pygame.sprite.Sprite):
 
         # Если направление вправо, то зеркалим картинку
         if not self.idleLeft:
-            self.image = pygame.transform.flip(self.image, True, False)
+            self.image = pygame.transform.flip(
+                self.image, True, False)
         self.animCount += 1  # Счётчик подсчитывает, какую картинку по счёту я должен показать
 
-    def get_coords(self):
+    def get_coords(
+            self):
         return self.rect.x, self.rect.y

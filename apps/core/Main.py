@@ -179,19 +179,16 @@ def create_platforms():
             elif b == 1:  # Создаём спрайт платформы
                 Platform(
                     (all_sprites_group, platform_group),
-                    x, y, platform_size_x, platform_size_y
-                )
+                    x, y, platform_size_x, platform_size_y)
             elif b == "E":
                 # Создаём спрайт врага
                 Enemy(
                     (all_sprites_group, enemy_group),
-                    x, y, platform_size_x, platform_size_y
-                )
+                    x, y, platform_size_x, platform_size_y)
             elif b == "B":
                 Bird(
                     (all_sprites_group, bot_group),
-                    x, y, platform_size_x, platform_size_y
-                )
+                    x, y, platform_size_x, platform_size_y)
             x += platform_size_x
         x = 0
         y += platform_size_y
@@ -203,7 +200,8 @@ draw_level()
 
 run = True
 while run:
-    clock.tick(FPS)  # ограничиваем ФПС
+    clock.tick(
+        FPS)  # ограничиваем ФПС
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  # Если нажали на крестикв углу (его не видно в фуллскрин)
             run = False
@@ -212,12 +210,10 @@ while run:
                 run = False
 
     hero.update(
-        platform_group
-    )  # Обновляем героя
+        platform_group)  # Обновляем героя
 
     enemy_group.update(
-        hero_group
-    )
+        hero_group)
 
     bot_group.update()
     drawWindow()

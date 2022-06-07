@@ -1,37 +1,15 @@
 import pygame
 from media.settings.settings import user_screen_h, user_screen_w
+from media.captures.actions.menu_media import button_start, fontImpact, button_h, button_w, button_base
 
 pygame.init()
-# ШРИФТЫ
-
-fontImpact = pygame.font.SysFont("Impact", 72)
-
-BUTTON_H = int(user_screen_h * 0.25)
-BUTTON_W = int(user_screen_w * 0.40)
-
-BUTTON_H = 260
-BUTTON_W = 640
-
-button_base = [
-    pygame.Surface((BUTTON_W, BUTTON_H - 50)),
-    pygame.Surface((BUTTON_W, BUTTON_H - 50))
-]
-
-button_start = [
-    pygame.image.load("../../media/captures/actions/Tiles/Menu/play_button_passive.764.png").subsurface(0, 200, BUTTON_W, BUTTON_H),
-    pygame.image.load("../../media/captures/actions/Tiles/Menu/play_button_active.352.png").subsurface(0, 200, BUTTON_W, BUTTON_H),
-
-]
-
-# button_options = [
-#    pygame.image.load("Tiles/GUI/exit_button_passive.208.png").subsurface(0, 200, BUTTON_W, BUTTON_H),
-#    pygame.image.load("Tiles/GUI/exit_button_active.я139.png").subsurface(0, 200, BUTTON_W, BUTTON_H),
-#
-# ]
 
 button_exit = [
-    pygame.image.load("../../media/captures/actions/Tiles/Menu/exit_button_passive.208.png").subsurface(0, 200, BUTTON_W, BUTTON_H),
-    pygame.image.load("../../media/captures/actions/Tiles/Menu/exit_button_active.139.png").subsurface(0, 200, BUTTON_W, BUTTON_H),
+    pygame.image.load("../../media/captures/actions/Tiles/Menu/exit_button_passive.208.png").subsurface(0, 200,
+                                                                                                        button_w,
+                                                                                                        button_h),
+    pygame.image.load("../../media/captures/actions/Tiles/Menu/exit_button_active.139.png").subsurface(0, 200, button_w,
+                                                                                                       button_h),
 
 ]
 
@@ -40,7 +18,10 @@ button_base[1].fill((255, 0, 0))
 
 
 class Button(pygame.sprite.Sprite):
-    def __init__(self, button_name, y, width=BUTTON_W, height=BUTTON_H):  ### button_name - какая кнопка вызывается
+    def __init__(
+            self, button_name, y,
+            width=button_w, height=button_h):
+        # button_name - какая кнопка вызывается
         super().__init__()
         self.button_name = button_name
         self.width = width
@@ -50,8 +31,7 @@ class Button(pygame.sprite.Sprite):
 
         if self.button_name == 'START':
             self.images = button_start
-        #        elif self.button_name == 'OPTIONS':
-        #            self.images = button_exit
+
         elif self.button_name == 'EXIT':
             self.images = button_exit
         else:
@@ -59,9 +39,11 @@ class Button(pygame.sprite.Sprite):
 
         self.image = self.images[self.active]
 
-        self.rect = self.image.get_rect(centerx=user_screen_w // 2, y=y)
+        self.rect = self.image.get_rect(
+            centerx=user_screen_w // 2, y=y)
 
-    def update(self, *args):
+    def update(
+            self, *args):
         self.image = self.images[self.active]
 
 
@@ -70,13 +52,16 @@ class Menu():
         self.win = win  # Экран для отрисовки
 
         self.activeButton = 0  # Бывшая переменная num, какая кнопка сейчас активна
-        self.buttons = [Button("START", (BUTTON_H) * 0 + 230),
-                        #                        Button("OPTIONS", (BUTTON_H) * 1+270),
-                        Button("EXIT", (BUTTON_H) * 1 + 270),
-                        ]
+        self.buttons = [
+            Button("START", (button_h) * 0 + 230),
+            #                        Button("OPTIONS", (BUTTON_H) * 1+270),
+            Button("EXIT", (button_h) * 1 + 270),
+        ]
 
-    def update(self):
-        self.win.fill((56, 67, 128))
+    def update(
+            self):
+        self.win.fill(
+            (56, 67, 128))
 
         for b in self.buttons:
             b.update()
@@ -84,7 +69,7 @@ class Menu():
         pygame.display.update()
 
     def up(self):
-        if self.activeButton != 0:
+        if self.activeButton:
             self.buttons[self.activeButton].active = False
             self.activeButton -= 1
             self.buttons[self.activeButton].active = True
