@@ -25,7 +25,8 @@ class Hero(
     pygame.sprite.Sprite):
 
     def __init__(
-            self, groups, screenH, enemygroup):
+            self, groups, screenH,
+            enemygroup):
         super().__init__(groups)
         self.animCount = 0
         self.image = runAnimation[self.animCount]
