@@ -12,9 +12,6 @@ button_start = [
 
 ]
 
-fontImpact = pygame.font.SysFont(
-    "Impact", 72)
-
 button_base = [
     pygame.Surface((
         button_w, button_h - 50)),

@@ -1,6 +1,6 @@
 import pygame
 from media.settings.settings import user_screen_h, user_screen_w
-from media.captures.actions.menu_media import button_start, fontImpact, button_h, button_w, button_base
+from media.captures.actions.menu_media import button_start, button_h, button_w, button_base
 
 pygame.init()
 
@@ -17,7 +17,8 @@ button_base[0].fill((100, 100, 100))
 button_base[1].fill((255, 0, 0))
 
 
-class Button(pygame.sprite.Sprite):
+class Button(
+    pygame.sprite.Sprite):
     def __init__(
             self, button_name, y,
             width=button_w, height=button_h):
