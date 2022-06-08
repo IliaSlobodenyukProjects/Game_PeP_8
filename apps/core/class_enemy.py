@@ -102,8 +102,8 @@ class Enemy(
             if self.speedX > 0:
                 # Если двигаюсь вправо,
                 self.image = pygame.transform.flip(
-                    self.image, True, False
-                )  # то отзеркаливаю картинку персонажа
+                    self.image, True, False)
+                # то отзеркаливаю картинку персонажа
 
     def get_coords(
             self):

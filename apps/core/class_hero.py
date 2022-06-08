@@ -95,7 +95,8 @@ class Hero(
             self.attack = True
             self.attacka()
 
-        self.check_collizion(platforms)
+        self.check_collizion(
+            platforms)
         #    var = self.onGrond
         self.animation()
         self.is_alive()
