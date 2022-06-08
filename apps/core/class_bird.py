@@ -7,15 +7,15 @@ flyAnimation = []
 for image in fly:
     flyAnimation.append(
         pygame.transform.scale(
-            image, (
-                bird_w, bird_h)))
+            image, (bird_w, bird_h)))
 
 
 class Bird(
     pygame.sprite.Sprite):
 
     def __init__(
-            self, groups, x, y, width, height):
+            self, groups, x,
+            y, width, height):
         super().__init__(
             groups)
         self.animCount = 0

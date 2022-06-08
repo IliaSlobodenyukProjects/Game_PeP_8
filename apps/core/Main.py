@@ -34,9 +34,6 @@ hero = Hero(
 hero_group = pygame.sprite.Group()
 hero_group.add(hero)
 
-# def draw_level():
-#    Отрисовываем статичный фон
-# Создаём персонажа по шаблону из класса
 GRASS_sprite = pygame.transform.scale(
     grass, (650, 650))  # уменьшение размера травы
 
@@ -90,7 +87,8 @@ def showMenu():
                 if event.key == pygame.K_DOWN:
                     menu.down()
                 if event.key == 13:
-                    if menu.activeButton == 0:  # Если выбрано "START GAME"
+                    if menu.activeButton == 0:
+                        # Если выбрано "START GAME"
                         return
                     elif menu.activeButton == 1:
                         pygame.quit()

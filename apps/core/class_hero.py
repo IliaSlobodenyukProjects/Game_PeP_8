@@ -131,19 +131,25 @@ class Hero(
             self):
         # ATAKA
         if self.attack:
-            if self.animCount >= len(attackAnimation) // 2:  # если я дошёл до последней картинки в списке картинок
+            if self.animCount >= len(attackAnimation) // 2:
+                # если я дошёл до последней картинки в списке картинок
                 self.animCount = 0
-                self.attack = False  # то обнуляю счётчик, чтобы начать сначала
-            self.image = attackAnimation[self.animCount]  # Достаю картинку с нужным номером из списка
+                self.attack = False
+                # то обнуляю счётчик, чтобы начать сначала
+            self.image = attackAnimation[self.animCount]
+            # Достаю картинку с нужным номером из списка
 
         # БЕГ
-        elif self.speedX:  # Если скорость по Х не нулевая, значит я иду
-            if self.animCount >= len(runAnimation):  # если я дошёл до последней картинки в списке картинок
-                self.animCount = 0  # то обнуляю счётчик, чтобы начать сначала
+        elif self.speedX:
+            # Если скорость по Х не нулевая, значит я иду
+            if self.animCount >= len(runAnimation):
+                # если я дошёл до последней картинки в списке картинок
+                self.animCount = 0
+                # то обнуляю счётчик, чтобы начать сначала
 
-            self.image = runAnimation[self.animCount]  # Достаю картинку с нужным номером из списка
-            # if self.speedX > 0:  # Если двигаюсь вправо,
-            #     self.image = pygame.transform.flip(self.image, True, False)  # то отзеркаливаю картинку персонажа
+            self.image = runAnimation[self.animCount]
+            # Достаю картинку с нужным номером из списка
+
 
         # СТОИТ
         else:  # иначе скорость = 0, значит стою на месте
@@ -151,16 +157,11 @@ class Hero(
                 self.animCount = 0
             self.image = idleAnimation[self.animCount]
 
-        #        if not self.onGrond:
-        #        if self.animCount >= len(jumpAnimation):
-        #                self.animCount = 0
-        # self        self.image = jumpAnimation[self.animCount]
-
-        # Если направление вправо, то зеркалим картинку
         if not self.idleLeft:
             self.image = pygame.transform.flip(
                 self.image, True, False)
-        self.animCount += 1  # Счётчик подсчитывает, какую картинку по счёту я должен показать
+        self.animCount += 1
+        # Счётчик подсчитывает, какую картинку по счёту я должен показать
 
     def get_coords(
             self):

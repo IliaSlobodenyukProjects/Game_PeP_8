@@ -88,13 +88,19 @@ class Enemy(
     def animation(
             self):
 
-        if self.speedX:  # Если скорость по Х не нулевая, значит я иду
-            self.animCount += 1  # Счётчик подсчитывает, какую картинку по счёту я должен показать
-            if self.animCount == len(run_animation):  # если я дошёл до последней картинки в списке картинок
-                self.animCount = 0  # то обнуляю счётчик, чтобы начать сначала
+        if self.speedX:
+            # Если скорость по Х не нулевая, значит я иду
+            self.animCount += 1
+            # Счётчик подсчитывает, какую картинку по счёту я должен показать
+            if self.animCount == len(run_animation):
+                # если я дошёл до последней картинки в списке картинок
+                self.animCount = 0
+                # то обнуляю счётчик, чтобы начать сначала
 
-            self.image = run_animation[self.animCount]  # Достаю картинку с нужным номером из списка
-            if self.speedX > 0:  # Если двигаюсь вправо,
+            self.image = run_animation[self.animCount]
+            # Достаю картинку с нужным номером из списка
+            if self.speedX > 0:
+                # Если двигаюсь вправо,
                 self.image = pygame.transform.flip(
                     self.image, True, False
                 )  # то отзеркаливаю картинку персонажа

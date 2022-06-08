@@ -43,9 +43,10 @@ class Button(
 class Menu():
     def __init__(
             self, win):
-        self.win = win  # Экран для отрисовки
+        self.win = win
+        # Экран для отрисовки
 
-        self.activeButton = 0  # Бывшая переменная num, какая кнопка сейчас активна
+        self.activeButton = 0
         self.buttons = [
             Button("START", button_h * 0 + 230),
             #                        Button("OPTIONS", (BUTTON_H) * 1+270),
