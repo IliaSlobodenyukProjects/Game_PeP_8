@@ -27,7 +27,8 @@ class Hero(
     def __init__(
             self, groups, screenH,
             enemygroup):
-        super().__init__(groups)
+        super().__init__(
+            groups)
         self.animCount = 0
         self.image = runAnimation[self.animCount]
         self.hp = 4
@@ -47,9 +48,6 @@ class Hero(
 
         self.idleLeft = True
         self.attack = False
-
-    #        self.weapon = classes2[sprite][1]
-    #        self.move = classes2[sprite][-2]
 
     def update(
             self, platforms):
@@ -114,20 +112,23 @@ class Hero(
         else:
             self.on_ground = False
 
-    def is_alive(self):
+    def is_alive(
+            self):
         if self.hp:
             return True
         else:
             return False
 
-    def attacka(self):
+    def attacka(
+            self):
         hits = pygame.sprite.spritecollide(
             self, self.enemygroup, True,
             pygame.sprite.collide_circle)
         if hits:
             return True
 
-    def animation(self):
+    def animation(
+            self):
         # ATAKA
         if self.attack:
             if self.animCount >= len(attackAnimation) // 2:  # если я дошёл до последней картинки в списке картинок

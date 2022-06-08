@@ -18,11 +18,13 @@ class Enemy(
             self, groups, x, y,
             width, height):
 
-        super().__init__(groups)
+        super().__init__(
+            groups)
 
         self.animCount = 0
         self.image = run_animation[self.animCount]
-        self.rect = self.image.get_rect(x=x, bottom=y + height + 500)
+        self.rect = self.image.get_rect(
+            x=x, bottom=y + height + 500)
         self.speedX = 0
         self.Left = False
         self.hp = 2
@@ -104,7 +106,8 @@ class Enemy(
     def attacka(
             self):
         hits = pygame.sprite.spritecollide(
-            self, self.herogroup, False, pygame.sprite.collide_circle)
+            self, self.herogroup, False,
+            pygame.sprite.collide_circle)
         if hits:
             self.hhp += 1
             return True

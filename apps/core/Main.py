@@ -11,12 +11,10 @@ from media.captures.actions.another import grass, \
 
 pygame.init()
 win = pygame.display.set_mode(
-    (user_screen_w, user_screen_h), pygame.FULLSCREEN
-)
+    (user_screen_w, user_screen_h), pygame.FULLSCREEN)
 
 bg = pygame.transform.scale(
-    bg, (user_screen_w, user_screen_h)
-)
+    bg, (user_screen_w, user_screen_h))
 
 clock = pygame.time.Clock()
 FPS = 60
@@ -30,8 +28,8 @@ bot_group = pygame.sprite.Group()  # Группа животных
 for i in range(len(enemy_group)):
     eng.append(Enemy)
 hero = Hero(
-    all_sprites_group, user_screen_h, enemy_group
-)  # Создаём персонажа по шаблону из класса
+    all_sprites_group, user_screen_h, enemy_group)
+    # Создаём персонажа по шаблону из класса
 
 hero_group = pygame.sprite.Group()
 hero_group.add(hero)
@@ -40,58 +38,45 @@ hero_group.add(hero)
 #    Отрисовываем статичный фон
 # Создаём персонажа по шаблону из класса
 GRASS_sprite = pygame.transform.scale(
-    grass, (650, 650)
-)  # уменьшение размера травы
+    grass, (650, 650))  # уменьшение размера травы
 
 tree_1_sprite = pygame.transform.scale(
-    tree_1, (250, 250)
-)  # уменьшение размера дерева1
+    tree_1, (250, 250))  # уменьшение размера дерева1
 
 tree_2_sprite = pygame.transform.scale(
-    tree_2, (450, 450)
-)  # уменьшение размера дерева2
+    tree_2, (450, 450))  # уменьшение размера дерева2
 
 tree_3_sprite = pygame.transform.scale(
-    tree_3, (650, 650)
-)  # уменьшение размера дерева3
+    tree_3, (650, 650))  # уменьшение размера дерева3
 
 tree_4_sprite = pygame.transform.scale(
-    tree_4, (465, 465)
-)  # уменьшение размера дерева4
+    tree_4, (465, 465))  # уменьшение размера дерева4
 
 flower_1_sprite = pygame.transform.scale(
-    flower_1, (150, 150)
-)  # уменьшение размера цветка1
+    flower_1, (150, 150))  # уменьшение размера цветка1
 
 flower_2_sprite = pygame.transform.scale(
-    flower_2, (125, 125)
-)  # уменьшение размера цветка2
+    flower_2, (125, 125))  # уменьшение размера цветка2
 
 
 def drawWindow():
     win.blit(
-        bg, (0, 0)
-    )  # фон
+        bg, (0, 0))  # фон
     platform_group.draw(
-        win
-    )  # Отрисвываем уровень
+        win)  # Отрисвываем уровень
     enemy_group.draw(
-        win
-    )
+        win)
     bot_group.draw(
-        win
-    )  # боты в будущем
+        win)  # боты в будущем
     win.blit(
-        hero.image, hero.rect
-    )  # главный герой
+        hero.image, hero.rect)  # главный герой
     pygame.display.update()  # обновление экрана
 
 
 def showMenu():
     #    стартовое меню
     menu = Menu(
-        win
-    )
+        win)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -116,51 +101,33 @@ def showMenu():
 def draw_level():
     bg.blit(
         tree_1_sprite, tree_1_sprite.get_rect(
-            x=635, y=750
-        )
-    )  # создание дерева1
+            x=635, y=750))  # создание дерева1
     bg.blit(
         tree_2_sprite, tree_2_sprite.get_rect(
-            x=65, y=550
-        )
-    )  # создание дерева2
+            x=65, y=550))  # создание дерева2
     bg.blit(
         tree_3_sprite, tree_3_sprite.get_rect(
-            x=800, y=425
-        )
-    )  # создание дерева3
+            x=800, y=425))  # создание дерева3
     bg.blit(
         tree_4_sprite, tree_4_sprite.get_rect(
-            x=1500, y=565
-        )
-    )  # создание дерева4
+            x=1500, y=565))  # создание дерева4
 
     bg.blit(
         flower_1_sprite, flower_1_sprite.get_rect(
-            x=1250, y=880
-        )
-    )  # создание цветка1
+            x=1250, y=880))  # создание цветка1
     bg.blit(
         flower_2_sprite, flower_2_sprite.get_rect(
-            x=120, y=890
-        )
-    )  # создание цветка2
+            x=120, y=890))  # создание цветка2
 
     bg.blit(
         GRASS_sprite, GRASS_sprite.get_rect(
-            x=0, y=630
-        )
-    )  # создание травы
+            x=0, y=630))  # создание травы
     bg.blit(
         GRASS_sprite, GRASS_sprite.get_rect(
-            x=635, y=630
-        )
-    )
+            x=635, y=630))
     bg.blit(
         GRASS_sprite, GRASS_sprite.get_rect(
-            x=635 * 2, y=630
-        )
-    )
+            x=635 * 2, y=630))
 
 
 def create_platforms():

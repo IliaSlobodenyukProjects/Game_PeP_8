@@ -1,17 +1,9 @@
 import pygame
 from media.settings.settings import user_screen_h, user_screen_w
-from media.captures.actions.menu_media import button_start, button_h, button_w, button_base
+from media.captures.actions.menu_media import button_start, \
+    button_h, button_w, button_base, button_exit
 
 pygame.init()
-
-button_exit = [
-    pygame.image.load("../../media/captures/actions/Tiles/Menu/exit_button_passive.208.png").subsurface(0, 200,
-                                                                                                        button_w,
-                                                                                                        button_h),
-    pygame.image.load("../../media/captures/actions/Tiles/Menu/exit_button_active.139.png").subsurface(0, 200, button_w,
-                                                                                                       button_h),
-
-]
 
 button_base[0].fill((100, 100, 100))
 button_base[1].fill((255, 0, 0))
@@ -49,14 +41,15 @@ class Button(
 
 
 class Menu():
-    def __init__(self, win):
+    def __init__(
+            self, win):
         self.win = win  # Экран для отрисовки
 
         self.activeButton = 0  # Бывшая переменная num, какая кнопка сейчас активна
         self.buttons = [
-            Button("START", (button_h) * 0 + 230),
+            Button("START", button_h * 0 + 230),
             #                        Button("OPTIONS", (BUTTON_H) * 1+270),
-            Button("EXIT", (button_h) * 1 + 270),
+            Button("EXIT", button_h * 1 + 270),
         ]
 
     def update(
@@ -69,13 +62,15 @@ class Menu():
             self.win.blit(b.image, b.rect)
         pygame.display.update()
 
-    def up(self):
+    def up(
+            self):
         if self.activeButton:
             self.buttons[self.activeButton].active = False
             self.activeButton -= 1
             self.buttons[self.activeButton].active = True
 
-    def down(self):
+    def down(
+            self):
         if self.activeButton + 1 != len(self.buttons):
             self.buttons[self.activeButton].active = False
             self.activeButton += 1

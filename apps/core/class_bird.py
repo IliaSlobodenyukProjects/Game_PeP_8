@@ -16,7 +16,8 @@ class Bird(
 
     def __init__(
             self, groups, x, y, width, height):
-        super().__init__(groups)
+        super().__init__(
+            groups)
         self.animCount = 0
         self.image = flyAnimation[self.animCount]
         self.rect = self.image.get_rect(
