@@ -1,5 +1,5 @@
 import pygame
-from media.captures.actions.platform import platform_image
+from media.captures.actions.platform import Platform_image
 
 
 class Platform(
@@ -9,11 +9,8 @@ class Platform(
             self, groups, x,
             y, w, h):
         super().__init__(
-            groups
-        )
+            groups)
         self.image = pygame.transform.scale(
-            platform_image, (180, 180)
-        )
+            Platform_image, (180, 180))
         self.rect = self.image.get_rect(
-            x=x, y=y
-        )
+            x=x, y=y)
