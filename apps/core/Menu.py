@@ -1,19 +1,19 @@
 import pygame
-from media.settings.settings import user_screen_h, user_screen_w
-from media.captures.actions.menu_media import button_start, \
-    button_h, button_w, button_base, button_exit
+from media.settings.settings import User_screen_h, User_screen_w
+from media.captures.actions.menu_media import Button_start, \
+    Button_h, Button_w, Button_base, Button_exit
 
 pygame.init()
 
-button_base[0].fill((100, 100, 100))
-button_base[1].fill((255, 0, 0))
+Button_base[0].fill((100, 100, 100))
+Button_base[1].fill((255, 0, 0))
 
 
 class Button(
     pygame.sprite.Sprite):
     def __init__(
             self, button_name, y,
-            width=button_w, height=button_h):
+            width=Button_w, height=Button_h):
         # button_name - какая кнопка вызывается
         super().__init__()
         self.button_name = button_name
@@ -22,18 +22,16 @@ class Button(
 
         self.active = False
 
+        self.images = Button_base
         if self.button_name == 'START':
-            self.images = button_start
-
-        elif self.button_name == 'EXIT':
-            self.images = button_exit
+            self.images = Button_start
         else:
-            self.images = button_base
+            self.images = Button_exit
 
         self.image = self.images[self.active]
 
         self.rect = self.image.get_rect(
-            centerx=user_screen_w // 2, y=y)
+            centerx=User_screen_w // 2, y=y)
 
     def update(
             self, *args):
@@ -46,11 +44,10 @@ class Menu():
         self.win = win
         # Экран для отрисовки
 
-        self.activeButton = 0
+        self.active_button = 0
         self.buttons = [
-            Button("START", button_h * 0 + 230),
-            #                        Button("OPTIONS", (BUTTON_H) * 1+270),
-            Button("EXIT", button_h * 1 + 270),
+            Button("START", Button_h * 0 + 230),
+            Button("EXIT", Button_h * 1 + 270),
         ]
 
     def update(
@@ -65,14 +62,14 @@ class Menu():
 
     def up(
             self):
-        if self.activeButton:
-            self.buttons[self.activeButton].active = False
-            self.activeButton -= 1
-            self.buttons[self.activeButton].active = True
+        if self.active_button:
+            self.buttons[self.active_button].active = False
+            self.active_button -= 1
+            self.buttons[self.active_button].active = True
 
     def down(
             self):
-        if self.activeButton + 1 != len(self.buttons):
-            self.buttons[self.activeButton].active = False
-            self.activeButton += 1
-            self.buttons[self.activeButton].active = True
+        if self.active_button + 1 != len(self.buttons):
+            self.buttons[self.active_button].active = False
+            self.active_button += 1
+            self.buttons[self.active_button].active = True

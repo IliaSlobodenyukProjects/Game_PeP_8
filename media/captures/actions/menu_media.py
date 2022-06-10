@@ -1,35 +1,35 @@
 import pygame
 
-button_h = 260
-button_w = 640
+Button_h = 260
+Button_w = 640
 
-button_start = [
+Button_start = [
     pygame.image.load(
         "../../media/captures/actions/"
-        "Tiles/Menu/play_button_passive.764.png").subsurface(0, 200, button_w, button_h),
+        "Tiles/Menu/play_button_passive.764.png").subsurface(0, 200, Button_w, Button_h),
     pygame.image.load(
         "../../media/captures/actions/"
-        "Tiles/Menu/play_button_active.352.png").subsurface(0, 200, button_w, button_h),
+        "Tiles/Menu/play_button_active.352.png").subsurface(0, 200, Button_w, Button_h),
 
 ]
 
-button_exit = [
+Button_exit = [
     pygame.image.load("../../media/captures/actions/"
                       "Tiles/Menu/"
                       "exit_button_passive.208.png").subsurface(
         0, 200,
-        button_w,
-        button_h),
+        Button_w,
+        Button_h),
     pygame.image.load("../../media/captures/actions/"
                       "Tiles/Menu/"
                       "exit_button_active.139.png").subsurface(
-        0, 200, button_w,
-        button_h),
+        0, 200, Button_w,
+        Button_h),
 ]
 
-button_base = [
+Button_base = [
     pygame.Surface((
-        button_w, button_h - 50)),
+        Button_w, Button_h - 50)),
     pygame.Surface((
-        button_w, button_h - 50))
+        Button_w, Button_h - 50))
 ]
