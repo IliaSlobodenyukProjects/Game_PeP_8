@@ -1,13 +1,13 @@
 import pygame
-from media.settings.settings import user_screen_w
-from media.captures.actions.bird_media import fly
-from media.settings.set import bird_w, bird_h, speed_bird
+from media.settings.settings import User_screen_w
+from media.captures.actions.bird_media import Fly
+from media.settings.constants import Bird_w, Bird_h, Speed_bird
 
-flyAnimation = []
-for image in fly:
-    flyAnimation.append(
+fly_animation = []
+for image in Fly:
+    fly_animation.append(
         pygame.transform.scale(
-            image, (bird_w, bird_h)))
+            image, (Bird_w, Bird_h)))
 
 
 class Bird(
@@ -18,39 +18,39 @@ class Bird(
             y, width, height):
         super().__init__(
             groups)
-        self.animCount = 0
-        self.image = flyAnimation[self.animCount]
+        self.anim_count = 0
+        self.image = fly_animation[self.anim_count]
         self.rect = self.image.get_rect(
             x=x, bottom=y + height + 500)
-        self.speedX = 0
+        self.speed_x = 0
         self.Left = False
 
     def update(
             self):
 
         if not self.Left:
-            self.speedX = speed_bird
-            if self.rect.right > user_screen_w:
-                self.speedX = 0
+            self.speed_x = Speed_bird
+            if self.rect.right > User_screen_w:
+                self.speed_x = 0
                 self.Left = True
         else:
-            self.speedX = -speed_bird
+            self.speed_x = -Speed_bird
             if self.rect.right < 150:
-                self.speedX = 0
+                self.speed_x = 0
                 self.Left = False
 
-        self.rect.x += self.speedX
+        self.rect.x += self.speed_x
         self.animation()
 
     def animation(
             self):
 
-        if self.speedX:
-            self.animCount += 1
-            if self.animCount == len(flyAnimation):
-                self.animCount = 0
+        if self.speed_x:
+            self.anim_count += 1
+            if self.anim_count == len(fly_animation):
+                self.anim_count = 0
 
-            self.image = flyAnimation[self.animCount]
-            if self.speedX < 0:  # Если двигаюсь вправо,
+            self.image = fly_animation[self.anim_count]
+            if self.speed_x < 0:  # Если двигаюсь вправо,
                 self.image = pygame.transform.flip(
                     self.image, True, False)

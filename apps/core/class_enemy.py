@@ -1,15 +1,17 @@
 import pygame
-from media.settings.settings import user_screen_w
-from media.captures.actions.enemy_media import walk
-from media.settings.set import enemy_w, enemy_h, speed
+from media.settings.settings import User_screen_w
+from media.captures.actions.enemy_media import Walk
+from media.settings.constants import Enemy_w, Enemy_h, Speed, Gravitation
 
-run_animation = []  # ghjdthrf
+run_animation = []
+# Список, в котором хранятся
+# анимации, и из которого они перебираются
 
-for image in walk:
+for image in Walk:
     run_animation.append(
         pygame.transform.scale(
             image, (
-                enemy_w, enemy_h)))
+                Enemy_w, Enemy_h)))
 
 
 class Enemy(
@@ -21,18 +23,19 @@ class Enemy(
         super().__init__(
             groups)
 
-        self.animCount = 0
-        self.image = run_animation[self.animCount]
+        self.anim_count = 0
+        self.image = run_animation[self.anim_count]
         self.rect = self.image.get_rect(
             x=x, bottom=y + height + 500)
-        self.speedX = 0
-        self.Left = False
+        self.speed_x = 0
+        self.left = False
         self.hp = 2
 
-        self.speedY = 0
-        self.grav = 2
-        self.on_ground = True  # Стоит на земле
+        self.speed_y = 0
+        self.on_ground = True
+        # Стоит на земле
         self.ground = y + height + 40
+        # вычисления для коллизии
         self.y = y
         self.x = x
         self.range = 40
@@ -44,27 +47,27 @@ class Enemy(
         self.herogroup = herogroup
         keys = pygame.key.get_pressed()
 
-        self.rect.x += self.speedX
-        self.rect.y += self.speedY
+        self.rect.x += self.speed_x
+        self.rect.y += self.speed_y
 
-        if not self.Left:
-            self.speedX = speed
-            if self.rect.right > user_screen_w:
-                self.speedX = 0
-                self.Left = True
+        if not self.left:
+            self.speed_x = Speed
+            if self.rect.right > User_screen_w:
+                self.speed_x = 0
+                self.left = True
         else:
-            self.speedX = -speed
+            self.speed_x = -Speed
             if self.rect.right < 150:
-                self.speedX = 0
-                self.Left = False
+                self.speed_x = 0
+                self.left = False
 
         if not self.on_ground:
-            self.speedY += self.grav
+            self.speed_y += Gravitation
 
         if self.rect.bottom >= self.ground:
             self.rect.bottom = self.ground
             self.on_ground = True
-            self.speedY = 0
+            self.speed_y = 0
 
         self.animation()
 
@@ -78,28 +81,28 @@ class Enemy(
 
         if pygame.sprite.spritecollideany(
                 self, platforms):
-            if self.speedY != 0:
-                if self.speedY > 0:
+            if self.speed_y != 0:
+                if self.speed_y > 0:
                     self.on_ground = True
-                self.speedY = 0
+                self.speed_y = 0
         else:
-            self.speedY += self.grav
+            self.speed_y += Gravitation
 
     def animation(
             self):
 
-        if self.speedX:
+        if self.speed_x:
             # Если скорость по Х не нулевая, значит я иду
-            self.animCount += 1
+            self.anim_count += 1
             # Счётчик подсчитывает, какую картинку по счёту я должен показать
-            if self.animCount == len(run_animation):
+            if self.anim_count == len(run_animation):
                 # если я дошёл до последней картинки в списке картинок
-                self.animCount = 0
+                self.anim_count = 0
                 # то обнуляю счётчик, чтобы начать сначала
 
-            self.image = run_animation[self.animCount]
+            self.image = run_animation[self.anim_count]
             # Достаю картинку с нужным номером из списка
-            if self.speedX > 0:
+            if self.speed_x > 0:
                 # Если двигаюсь вправо,
                 self.image = pygame.transform.flip(
                     self.image, True, False)

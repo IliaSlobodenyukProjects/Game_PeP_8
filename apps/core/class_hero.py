@@ -1,49 +1,48 @@
 import pygame
-from media.captures.actions.hero_media import walk, idle, attack
-from media.settings.set import hero_h, hero_w, speed_hero, jump_hero
+from media.captures.actions.hero_media import Walk, Idle, Attack
+from media.settings.constants import Hero_h, Hero_w, Speed_hero, Jump_hero, Gravitation
 
 runAnimation = []
-for image in walk:
+for image in Walk:
     runAnimation.append(
         pygame.transform.scale(
-            image, (hero_w, hero_h)))
+            image, (Hero_w, Hero_h)))
 jumpAnimation = []
 
 idleAnimation = []
-for image in idle:
+for image in Idle:
     idleAnimation.append(
         pygame.transform.scale(
-            image, (hero_w, hero_h)))  # PeP_8
+            image, (Hero_w, Hero_h)))  # PeP_8
 attackAnimation = []
-for image in attack:  # PeP_8
+for image in Attack:  # PeP_8
     attackAnimation.append(
         pygame.transform.scale(
-            image, (hero_w, hero_h)))
+            image, (Hero_w, Hero_h)))
 
 
 class Hero(
     pygame.sprite.Sprite):
 
     def __init__(
-            self, groups, screenH,
+            self, groups, screen_h,
             enemygroup):
         super().__init__(
             groups)
-        self.animCount = 0
-        self.image = runAnimation[self.animCount]
+        self.anim_count = 0
+        self.image = runAnimation[self.anim_count]
         self.hp = 4
 
         self.rect = self.image.get_rect(
-            x=5, bottom=screenH)
-        self.speedX = 0
+            x=5, bottom=screen_h)
+        self.speed_x = 0
         self.a = self.get_coords()
 
         # Движение по Y
-        self.speedY = 0
-        self.grav = 2  # гравитация - скорость движения вниз
+        self.speed_y = 0
         self.on_ground = True  # Стоит на земле
-        self.isJump = False  # прыгает или нет
-        self.ground = screenH
+        self.is_jump = False  # прыгает или нет
+        self.ground = screen_h
         self.enemygroup = enemygroup
 
         self.idleLeft = True
@@ -51,47 +50,39 @@ class Hero(
 
     def update(
             self, platforms):
-        """
-        Функция запускается из главной программы постоянно(в цикле)
-        :param platforms:
-        :return:
-        """
-        # добавь управление
+
         keys = pygame.key.get_pressed()
-        self.speedX = 0
+        self.speed_x = 0
         if keys[pygame.K_a]:  # ЛЕВО
             self.idleLeft = True
-            # self.idleRight = False
             if self.rect.left > 0:
-                self.speedX = -speed_hero
+                self.speed_x = -Speed_hero
             self.a = self.get_coords()
 
         elif keys[pygame.K_d]:
             self.idleLeft = False
-            # self.idleRight = True
-            # if self.rect.right < USER_SCREEN_W:
-            self.speedX = speed_hero
+            self.speed_x = Speed_hero
 
         if (keys[pygame.K_SPACE]
                 and self.on_ground):  # ПРЫЖОК
-            self.speedY -= jump_hero
+            self.speed_y -= Jump_hero
             self.on_ground = False
 
-        self.rect.x += self.speedX
-        self.rect.y += self.speedY
+        self.rect.x += self.speed_x
+        self.rect.y += self.speed_y
 
         if not self.on_ground:
-            self.speedY += self.grav
+            self.speed_y += Gravitation
 
         if self.rect.bottom >= self.ground:
             self.rect.bottom = self.ground
             self.on_ground = True
-            self.speedY = 0
+            self.speed_y = 0
 
         if (keys[pygame.K_e]
-                and self.speedX == 0):  # атака
+                and self.speed_x == 0):  # атака
             if not self.attack:
-                self.animCount = 0
+                self.anim_count = 0
             self.attack = True
             self.attacka()
 
@@ -106,10 +97,10 @@ class Hero(
 
         if pygame.sprite.spritecollideany(
                 self, Platform):
-            if self.speedY != 0:
-                if self.speedY > 0:
+            if self.speed_y != 0:
+                if self.speed_y > 0:
                     self.on_ground = True
-                self.speedY = 0
+                self.speed_y = 0
         else:
             self.on_ground = False
 
@@ -132,36 +123,36 @@ class Hero(
             self):
         # ATAKA
         if self.attack:
-            if self.animCount >= len(attackAnimation) // 2:
+            if self.anim_count >= len(attackAnimation) // 2:
                 # если я дошёл до последней картинки в списке картинок
-                self.animCount = 0
+                self.anim_count = 0
                 self.attack = False
                 # то обнуляю счётчик, чтобы начать сначала
-            self.image = attackAnimation[self.animCount]
+            self.image = attackAnimation[self.anim_count]
             # Достаю картинку с нужным номером из списка
 
         # БЕГ
-        elif self.speedX:
+        elif self.speed_x:
             # Если скорость по Х не нулевая, значит я иду
-            if self.animCount >= len(runAnimation):
+            if self.anim_count >= len(runAnimation):
                 # если я дошёл до последней картинки в списке картинок
-                self.animCount = 0
+                self.anim_count = 0
                 # то обнуляю счётчик, чтобы начать сначала
 
-            self.image = runAnimation[self.animCount]
+            self.image = runAnimation[self.anim_count]
             # Достаю картинку с нужным номером из списка
 
 
         # СТОИТ
         else:  # иначе скорость = 0, значит стою на месте
-            if self.animCount >= len(idleAnimation):
-                self.animCount = 0
-            self.image = idleAnimation[self.animCount]
+            if self.anim_count >= len(idleAnimation):
+                self.anim_count = 0
+            self.image = idleAnimation[self.anim_count]
 
         if not self.idleLeft:
             self.image = pygame.transform.flip(
                 self.image, True, False)
-        self.animCount += 1
+        self.anim_count += 1
         # Счётчик подсчитывает, какую картинку по счёту я должен показать
 
     def get_coords(
