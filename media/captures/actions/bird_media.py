@@ -1,6 +1,6 @@
 import pygame
 
-fly = [
+Fly = [
     pygame.image.load("../../media/captures/actions/"
                       "Tiles/Bird/Fly/Armature_fly_00.png"),
     pygame.image.load("../../media/captures/actions/"
@@ -43,4 +43,4 @@ fly = [
                       "Tiles/Bird/Fly/Armature_fly_19.png"),
     pygame.image.load("../../media/captures/actions/"
                       "Tiles/Bird/Fly/Armature_fly_20.png")
-]
+]  # полет птицы
