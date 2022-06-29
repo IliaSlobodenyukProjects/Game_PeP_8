@@ -1,4 +1,6 @@
 from sys import platform
+from pathlib import Path
+import os
 
 if (platform == "linux"
         or platform == "linux2"):
@@ -18,3 +20,7 @@ elif platform == "win32":
     user32 = ctypes.windll.user32
     User_screen_w, User_screen_h = user32.GetSystemMetrics(0), \
                                    user32.GetSystemMetrics(1)
+
+BASE_DIR = os.path.dirname(os.path.dirname('media'))
+MEDIA_ROOT = Path(BASE_DIR, 'media')
+MEDIA_URL = 'media'
