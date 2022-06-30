@@ -1,6 +1,6 @@
 import pygame
 from apps.core.class_hero import Hero
-from apps.core.Menu import Menu
+from apps.core.menu import Menu
 from media.levels.level import level1
 from media.settings.settings import User_screen_h, User_screen_w
 from media.levels.class_platform import Platform
@@ -134,8 +134,11 @@ def draw_level():
 
 def create_platforms():
     # все
-    platform_size_x = User_screen_w // len(level1[0])
-    platform_size_y = User_screen_h // len(level1)
+    try:
+        platform_size_x = User_screen_w // len(level1[0])
+        platform_size_y = User_screen_h // len(level1)
+    except IndexError:
+        print('Нет такого файла')
 
     x = 0
     y = 0

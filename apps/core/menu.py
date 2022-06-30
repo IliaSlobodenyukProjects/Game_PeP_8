@@ -5,8 +5,11 @@ from media.captures.actions.menu_media import Button_start, \
 
 pygame.init()
 
-Button_base[0].fill((100, 100, 100))
-Button_base[1].fill((255, 0, 0))
+try:
+    Button_base[0].fill((100, 100, 100))
+    Button_base[1].fill((255, 0, 0))
+except IndexError:
+    print('Нет такого файла')
 
 
 class Button(
