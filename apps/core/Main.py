@@ -6,8 +6,8 @@ from media.settings.settings import User_screen_h, User_screen_w
 from media.levels.class_platform import Platform
 from apps.core.class_enemy import Enemy
 from apps.core.class_bird import Bird
-from media.captures.actions.another import Grass, \
-    Tree_1, Tree_2, Tree_3, Tree_4, Flower_2, Flower_1, Bg
+from media.captures.actions.another import (Grass,
+    Tree_1, Tree_2, Tree_3, Tree_4, Flower_2, Flower_1, Bg)
 
 pygame.init()
 Win = pygame.display.set_mode(

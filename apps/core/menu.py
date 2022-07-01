@@ -1,7 +1,7 @@
 import pygame
 from media.settings.settings import User_screen_h, User_screen_w
-from media.captures.actions.menu_media import Button_start, \
-    Button_h, Button_w, Button_base, Button_exit
+from media.captures.actions.menu_media import (Button_start,
+    Button_h, Button_w, Button_base, Button_exit)
 
 pygame.init()
 
